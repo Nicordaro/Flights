@@ -8,27 +8,27 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public class ConnectDB {
 
-	private static final String jdbcURL = "jdbc:mysql://localhost/openflights";
+	private static final String jdbcURL = "jdbc:mysql://localhost:3307/openflights";
 	private static HikariDataSource ds;
-	
+
 	public static Connection getConnection() {
-		
+
 		if (ds == null) {
 			HikariConfig config = new HikariConfig();
 			config.setJdbcUrl(jdbcURL);
 			config.setUsername("root");
 			config.setPassword("");
-			
+
 			// configurazione MySQL
 			config.addDataSourceProperty("cachePrepStmts", "true");
 			config.addDataSourceProperty("prepStmtCacheSize", "250");
 			config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-			
+
 			ds = new HikariDataSource(config);
 		}
-		
+
 		try {
-			
+
 			return ds.getConnection();
 
 		} catch (SQLException e) {
